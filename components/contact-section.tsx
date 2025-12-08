@@ -1,5 +1,6 @@
 import { ContactForm } from "@/components/contact-form"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
+import { Suspense } from "react"
 
 export function ContactSection() {
     return (
@@ -13,7 +14,9 @@ export function ContactSection() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                     <div>
-                        <ContactForm />
+                        <Suspense fallback={<div className="h-[600px] w-full bg-muted/10 animate-pulse rounded-xl" />}>
+                            <ContactForm />
+                        </Suspense>
                     </div>
 
                     <div className="space-y-8">

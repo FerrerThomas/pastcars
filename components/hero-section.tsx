@@ -7,16 +7,32 @@ import { ArrowRight } from "lucide-react"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
 import Autoplay from "embla-carousel-autoplay"
 import Fade from "embla-carousel-fade"
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
+import { TextEffect } from "@/components/ui/text-effect"
 
 const heroImages = [
   "/images/plataformaHero/plataformaAmarok.png",
   "/images/plataformaHero/plataformaTera.png",
 ]
 
+const heroMessages = [
+  "Compra en concesionarios oficiales.",
+  "Financiación a tu medida.",
+  "La mejor postventa del mercado.",
+  "Garantía y confianza asegurada."
+]
+
 export function HeroSection() {
   const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: false }))
   const fadePlugin = useRef(Fade())
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentMessageIndex((prev) => (prev + 1) % heroMessages.length)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <section
@@ -40,9 +56,16 @@ export function HeroSection() {
                 tu próximo vehículo <br />
                 es más fácil.
               </h1>
-              <p className="text-xl md:text-2xl font-medium text-primary">
-                Compra en concesionarios oficiales.
-              </p>
+              <div className="h-16 md:h-20 flex items-center">
+                <TextEffect
+                  key={currentMessageIndex}
+                  per="char"
+                  preset="slide"
+                  className="text-xl md:text-2xl font-medium text-primary"
+                >
+                  {heroMessages[currentMessageIndex]}
+                </TextEffect>
+              </div>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
