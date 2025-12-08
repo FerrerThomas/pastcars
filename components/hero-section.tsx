@@ -50,7 +50,7 @@ export function HeroSection() {
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="rounded-full px-8 h-12 text-base font-bold border-2">
-                <Link href="/contacto">Contactanos</Link>
+                <Link href="/#contacto">Contactanos</Link>
               </Button>
             </div>
           </div>

@@ -10,7 +10,7 @@ export async function FeaturedVehicles() {
   /* Fetch Used Vehicles */
   const { data: usedVehicles } = await supabase
     .from("vehicles")
-    .select("*")
+    .select("*, brands(name), models(name)")
     .eq("is_new", false)
     .limit(3)
     .order("created_at", { ascending: false })
@@ -18,7 +18,7 @@ export async function FeaturedVehicles() {
   /* Fetch New Vehicles */
   const { data: newVehicles } = await supabase
     .from("vehicles")
-    .select("*")
+    .select("*, brands(name), models(name)")
     .eq("is_new", true)
     .limit(3)
     .order("created_at", { ascending: false })

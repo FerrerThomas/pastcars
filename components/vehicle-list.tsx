@@ -8,7 +8,7 @@ export async function VehicleList({
 }) {
   const supabase = await createClient()
 
-  let query = supabase.from("vehicles").select("*")
+  let query = supabase.from("vehicles").select("*, brands(name), models(name)")
 
   // Apply filters
   if (searchParams?.tipo === "nuevo") {

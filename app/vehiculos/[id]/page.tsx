@@ -12,7 +12,11 @@ export default async function VehiculoDetailPage({
   const { id } = await params
   const supabase = await createClient()
 
-  const { data: vehicle } = await supabase.from("vehicles").select("*").eq("id", id).single()
+  const { data: vehicle } = await supabase
+    .from("vehicles")
+    .select("*, brands(name), models(name), images:vehicle_images(*)")
+    .eq("id", id)
+    .single()
 
   if (!vehicle) {
     notFound()

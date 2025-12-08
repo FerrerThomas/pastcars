@@ -40,9 +40,9 @@ export function ContactSection() {
                                         <Phone className="h-6 w-6 text-primary" />
                                     </div>
                                     <div>
-                                        <h4 className="font-semibold text-foreground mb-1">Teléfono</h4>
-                                        <a href="tel:+541234567890" className="text-muted-foreground hover:text-primary transition-colors">
-                                            +54 123 456-7890
+                                        <h4 className="font-semibold text-foreground mb-1">Teléfono / WhatsApp</h4>
+                                        <a href="https://wa.me/5492355511672" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                                            +54 9 2355 51-1672
                                         </a>
                                     </div>
                                 </div>

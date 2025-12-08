@@ -4,7 +4,20 @@ import { Footer } from "@/components/footer"
 import { VehicleFilters } from "@/components/vehicle-filters"
 import { VehicleList } from "@/components/vehicle-list"
 
-export default function VehiculosPage() {
+export default async function VehiculosPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const resolvedSearchParams = await searchParams
+
+  // Transform to the shape VehicleList expects (simple object with strings)
+  const filters = {
+    tipo: resolvedSearchParams?.tipo as string,
+    minPrice: resolvedSearchParams?.minPrice as string,
+    maxPrice: resolvedSearchParams?.maxPrice as string,
+  }
+
   return (
     <main className="min-h-screen bg-background">
       <Header />
@@ -16,7 +29,7 @@ export default function VehiculosPage() {
           </aside>
           <div className="lg:col-span-3">
             <Suspense fallback={<div>Cargando vehículos...</div>}>
-              <VehicleList />
+              <VehicleList searchParams={filters} />
             </Suspense>
           </div>
         </div>
