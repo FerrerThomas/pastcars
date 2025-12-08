@@ -19,7 +19,10 @@ export function HeroSection() {
   const fadePlugin = useRef(Fade())
 
   return (
-    <section className="relative bg-background overflow-hidden py-8 md:py-12 lg:py-20">
+    <section
+      className="relative overflow-hidden py-8 md:py-12 lg:py-20 bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/images/gradient.jpg')" }}
+    >
       {/* Background decoration */}
       <div className="absolute top-0 right-0 -z-10 opacity-20 transform translate-x-1/2 -translate-y-1/2">
         {/* Abstract curvy lines could be an SVG or just subtle gradients */}
