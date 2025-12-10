@@ -1,8 +1,15 @@
 "use client"
 
+import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 
 export function WhatsAppFloat() {
+    const pathname = usePathname()
+
+    if (pathname?.startsWith('/admin')) {
+        return null
+    }
+
     return (
         <a
             href="https://wa.me/5492355511672"

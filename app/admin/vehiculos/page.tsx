@@ -12,6 +12,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
+import { DeleteVehicleButton } from "@/components/admin/delete-vehicle-button"
 
 export default async function AdminVehiclesPage() {
     const supabase = await createClient()
@@ -103,15 +104,10 @@ export default async function AdminVehiclesPage() {
                                                 <Pencil className="h-4 w-4" />
                                             </Link>
                                         </Button>
-                                        <form action={async () => {
-                                            "use server"
-                                            const supabase = await createClient()
-                                            await supabase.from("vehicles").delete().eq("id", vehicle.id)
-                                        }}>
-                                            <Button variant="ghost" size="icon" className="text-red-500 hover:text-red-600 hover:bg-red-50">
-                                                <Trash2 className="h-4 w-4" />
-                                            </Button>
-                                        </form>
+                                        <DeleteVehicleButton
+                                            vehicleId={vehicle.id}
+                                            vehicleName={`${vehicle.brands?.name} ${vehicle.models?.name}`}
+                                        />
                                     </div>
                                 </TableCell>
                             </TableRow>
