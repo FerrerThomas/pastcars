@@ -31,7 +31,7 @@ export function ContactSection() {
                                     <div>
                                         <h4 className="font-semibold text-foreground mb-1">Dirección</h4>
                                         <p className="text-muted-foreground">
-                                            Av. Principal 1234
+                                            Av. Perón 536, Lincoln
                                             <br />
                                             Buenos Aires, Argentina
                                         </p>

@@ -8,9 +8,9 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <div className="mb-4 bg-white p-2 rounded inline-block">
+            <div className="mb-4 p-2 rounded inline-block">
               <Image
-                src="/images/logopastcars.png"
+                src="/images/logopastcars2.png"
                 alt="PASTCARS Logo"
                 width={150}
                 height={40}
@@ -78,7 +78,7 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-gray-300">
               <li className="flex items-start gap-2">
                 <MapPin className="h-5 w-5 flex-shrink-0 mt-0.5" />
-                <span>Av. Principal 1234, Buenos Aires, Argentina</span>
+                <span>Av. Perón 536, Lincoln, Provincia de Buenos Aires</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="h-5 w-5 flex-shrink-0" />
