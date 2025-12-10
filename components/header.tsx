@@ -69,24 +69,7 @@ export function Header() {
               </Link>
             ))}
 
-            <div className="mt-4 pt-4 border-t flex flex-col gap-4 bg-muted/20 -mx-4 px-4 pb-4">
-              <a
-                href="https://wa.me/5492355511672"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Phone className="h-5 w-5" />
-                <span>+54 9 2355 51-1672</span>
-              </a>
-              <a
-                href="mailto:ventas@pastcars.com"
-                className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Mail className="h-5 w-5" />
-                <span>ventas@pastcars.com</span>
-              </a>
-            </div>
+
           </nav>
         </div>
       )}
