@@ -11,26 +11,13 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "PASTCARS - Tu Concesionaria de Confianza",
+  title: "PASTCARS",
   description:
     "Encontrá el vehículo perfecto en PASTCARS. Ofrecemos autos 0KM y usados con la mejor financiación y garantía del mercado.",
-  generator: "v0.app",
+  generator: "Tomas Ferrer",
   icons: {
-    icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
-    apple: "/apple-icon.png",
+    icon: "/images/favicon.png",
+    apple: "/images/favicon.png",
   },
 }
 
