@@ -10,8 +10,8 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Switch } from "@/components/ui/switch"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Card, CardContent } from "@/components/ui/card"
 import { X, Upload, Loader2, Star } from "lucide-react"
+import { useToast } from "@/hooks/use-toast"
 
 interface VehicleFormProps {
     initialData?: any
@@ -20,6 +20,7 @@ interface VehicleFormProps {
 
 export function VehicleForm({ initialData, isEditing = false }: VehicleFormProps) {
     const router = useRouter()
+    const { toast } = useToast()
     const [isLoading, setIsLoading] = useState(false)
     const [uploading, setUploading] = useState(false)
 
@@ -30,8 +31,8 @@ export function VehicleForm({ initialData, isEditing = false }: VehicleFormProps
 
     // Form State
     const [formData, setFormData] = useState({
-        brand_id: initialData?.brand_id || "",
-        model_id: initialData?.model_id || "",
+        brand_id: initialData?.brand_id?.toString() || "",
+        model_id: initialData?.model_id?.toString() || "",
         color: initialData?.color || "",
         year: initialData?.year || new Date().getFullYear(),
         price: initialData?.price || "",
@@ -54,7 +55,7 @@ export function VehicleForm({ initialData, isEditing = false }: VehicleFormProps
                 setModels(modelsData)
                 // If initial brand is set, filter models immediately
                 if (initialData?.brand_id) {
-                    setFilteredModels(modelsData.filter((m: any) => m.brand_id === initialData.brand_id))
+                    setFilteredModels(modelsData.filter((m: any) => m.brand_id == initialData.brand_id))
                 }
             }
         }
@@ -64,7 +65,7 @@ export function VehicleForm({ initialData, isEditing = false }: VehicleFormProps
     // Handle Brand Change
     const handleBrandChange = (brandId: string) => {
         setFormData(prev => ({ ...prev, brand_id: brandId, model_id: "" })) // Reset model
-        const validModels = models.filter(m => m.brand_id === brandId)
+        const validModels = models.filter(m => m.brand_id.toString() === brandId)
         setFilteredModels(validModels)
     }
 
@@ -134,10 +135,9 @@ export function VehicleForm({ initialData, isEditing = false }: VehicleFormProps
             const supabase = createClient()
 
             // 1. Insert/Update Vehicle
-            // 1. Insert/Update Vehicle
             const vehicleData = {
-                brand_id: formData.brand_id, // Use ID
-                model_id: formData.model_id, // Use ID
+                brand_id: formData.brand_id, // UUID string
+                model_id: formData.model_id, // UUID string
                 color: formData.color,
                 year: parseInt(formData.year.toString()),
                 price: parseFloat(formData.price.toString()),
@@ -168,7 +168,6 @@ export function VehicleForm({ initialData, isEditing = false }: VehicleFormProps
                 vehicleId = data.id
             }
 
-            // 2. Upload Images
             // 2. Upload Images
             let resolvedMainImage = mainImage.startsWith('blob:') ? null : mainImage
 
@@ -210,12 +209,22 @@ export function VehicleForm({ initialData, isEditing = false }: VehicleFormProps
                     .eq('id', vehicleId)
             }
 
+            toast({
+                title: isEditing ? "Vehículo actualizado" : "Vehículo creado",
+                description: "Los cambios se han guardado correctamente.",
+                duration: 3000,
+            })
+
             router.push('/admin/vehiculos')
             router.refresh()
 
         } catch (error) {
             console.error('Error saving vehicle:', error)
-            alert('Error al guardar el vehículo')
+            toast({
+                variant: "destructive",
+                title: "Error",
+                description: "Hubo un problema al guardar el vehículo.",
+            })
         } finally {
             setIsLoading(false)
             setUploading(false)
@@ -242,7 +251,7 @@ export function VehicleForm({ initialData, isEditing = false }: VehicleFormProps
                                 </SelectTrigger>
                                 <SelectContent>
                                     {brands.map((brand) => (
-                                        <SelectItem key={brand.id} value={brand.id}>
+                                        <SelectItem key={brand.id} value={brand.id.toString()}>
                                             {brand.name}
                                         </SelectItem>
                                     ))}
@@ -261,7 +270,7 @@ export function VehicleForm({ initialData, isEditing = false }: VehicleFormProps
                                 </SelectTrigger>
                                 <SelectContent>
                                     {filteredModels.map((model) => (
-                                        <SelectItem key={model.id} value={model.id}>
+                                        <SelectItem key={model.id} value={model.id.toString()}>
                                             {model.name}
                                         </SelectItem>
                                     ))}
